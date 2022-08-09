@@ -1,25 +1,48 @@
+import { useState } from "react";
+
 import Rotas from "./Rotas";
 import styled from "styled-components";
+import { ThemeProvider } from "styled-components";
 
-function App() {
+import ThemeSwitcher from "./componentes/ThemeSwitcher/index";
+
+import * as themes from "./styles/themes";
+import ThemeContext from "./styles/themes/context";
+
+export default function App() {
+  const [themeSwitch, setThemeSwitch] = useState({
+    theme: themes.dark,
+  });
+
+  const toggleTheme = () => {
+    setThemeSwitch({
+      theme: themeSwitch.theme === themes.dark ? themes.light : themes.dark,
+    });
+  };
+
   return (
-    <Main >
-      <header >
-        <Rotas />
-      </header>
-    </Main>
+    <ThemeContext.Provider value={themeSwitch}>
+      <ThemeContext.Consumer>
+        {(theme) => (
+          <ThemeProvider theme={theme}>
+            <Main>
+              <header>
+                <ThemeSwitcher toggleTheme={toggleTheme} />
+                <Rotas />
+              </header>
+            </Main>
+          </ThemeProvider>
+        )}
+      </ThemeContext.Consumer>
+    </ThemeContext.Provider>
   );
 }
 
-export default App;
-
-
-
 const Main = styled.main`
-  background-color: blueviolet;
+  background-color: ${(props) => props.theme.theme.background};
+  color: ${(props) => props.theme.theme.color};
   display: flex;
   align-items: center;
   justify-content: center;
   height: 100vh;
-`
-
+`;
