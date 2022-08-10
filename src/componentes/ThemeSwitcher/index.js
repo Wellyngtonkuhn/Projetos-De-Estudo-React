@@ -4,20 +4,18 @@ import { useContext } from "react";
 import context from "../../styles/themes/context";
 
 export default function ThemeSwitcher({ toggleTheme }) {
+
   const theme = useContext(context);
 
   return (
-    <Div>
+    <>
       <Button onClick={toggleTheme}>
         {theme.theme.background === "#000" ? "Light Mode" : "Dark Mode"}
       </Button>
-    </Div>
+    </>
   );
 }
 
-const Div = styled.div`
-
-`;
 
 const Button = styled.button`
   padding: 0.5rem 1rem;

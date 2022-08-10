@@ -1,6 +1,7 @@
 import { useState } from "react";
 
 import Rotas from "./Rotas";
+
 import styled from "styled-components";
 import { ThemeProvider } from "styled-components";
 
@@ -9,7 +10,9 @@ import ThemeSwitcher from "./componentes/ThemeSwitcher/index";
 import * as themes from "./styles/themes";
 import ThemeContext from "./styles/themes/context";
 
+
 export default function App() {
+  
   const [themeSwitch, setThemeSwitch] = useState({
     theme: themes.dark,
   });
@@ -24,7 +27,7 @@ export default function App() {
     <ThemeContext.Provider value={themeSwitch}>
       <ThemeContext.Consumer>
         {(theme) => (
-          <ThemeProvider theme={theme}>
+          <ThemeProvider theme={theme}> 
             <Main>
               <header>
                 <ThemeSwitcher toggleTheme={toggleTheme} />
@@ -42,7 +45,7 @@ const Main = styled.main`
   background-color: ${(props) => props.theme.theme.background};
   color: ${(props) => props.theme.theme.color};
   display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100vh;
+  min-height: 100vh;
+  padding-top: 1rem;
+  box-sizing:border-box;
 `;

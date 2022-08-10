@@ -1,7 +1,7 @@
 export default {
     background: '#fff',
     color: '#000',
-    hover: 'blue',
+    hover: '#cf9',
     imput: '',
     imputBackground: '#000',
     inputColor: '#fff',
