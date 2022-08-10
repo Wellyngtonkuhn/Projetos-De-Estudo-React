@@ -25,14 +25,17 @@ export default function Git() {
 
   const repoFilter =
     pesquisar.length > 0
-      ? repo.filter((repo) => repo.name.includes(pesquisar))
+      ? repo.filter((repo) => repo.name.toLowerCase().includes(pesquisar))
       : [];
 
   const handleFavorite = (id) => {
     repo.map((item) => {
-      return item.id === id && setFavoriteRepo(...favoriteRepo, item);
+      return item.id === id && favoriteRepo.map((Id)=>{
+        return Id.id !== id ? setFavoriteRepo([...favoriteRepo, item]) : window.alert('Favorito já adicionado')
+      });
     });
   };
+
 
   return (
     <>
@@ -45,7 +48,7 @@ export default function Git() {
           onChange={(e) => setPesquisar(e.target.value)}
           value={pesquisar}
         />
-        <H1>Favoritos {favoriteRepo.id ? favoriteRepo.id : "Sem id"}</H1>
+        <H1>Favoritos {favoriteRepo.length? favoriteRepo.length : ""}</H1>
         {pesquisar.length > 0 ? (
           <ul>
             {repoFilter.map((item) => {
