@@ -30,12 +30,13 @@ export default function Git() {
 
   const handleFavorite = (id) => {
     repo.map((item) => {
-      return item.id === id && favoriteRepo.map((Id)=>{
-        return Id.id !== id ? setFavoriteRepo([...favoriteRepo, item]) : window.alert('Favorito já adicionado')
-      });
+      if (item.id !== id) {
+        return setFavoriteRepo([...favoriteRepo, item]);
+      }
     });
   };
 
+  console.log(favoriteRepo);
 
   return (
     <>
@@ -48,7 +49,8 @@ export default function Git() {
           onChange={(e) => setPesquisar(e.target.value)}
           value={pesquisar}
         />
-        <H1>Favoritos {favoriteRepo.length? favoriteRepo.length : ""}</H1>
+        <H1>Favoritos {favoriteRepo.length ? favoriteRepo.length : ""}</H1>
+
         {pesquisar.length > 0 ? (
           <ul>
             {repoFilter.map((item) => {
